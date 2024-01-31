@@ -27,34 +27,28 @@
                 width: 330px;
                 margin: 0 20px;
 
-                .prev {
-
-                    background-image: url(../../img/signZip.png);
+                span {
                     position: absolute;
-                    top: 4px;
-                    left: 0;
+                    top: 16px;
                     width: 17px;
                     height: 26px;
-
+                    cursor: pointer;
                 }
-
+                .prev {
+                    background-image: url(../../img/signZip.png);
+                    left: 0;
+                }
+                .next {
+                    background-image: url(../../img/signZip.png);
+                    background-position: -17px 0px;
+                    right: 0;
+                }
                 h2 {
                     text-align: center;
                     font-size: 35px;
                     color: var(--white);
                     font-family: var(--dela);
                     text-transform: uppercase;
-                }
-
-                .next {
-                    background-image: url(../../img/signZip.png);
-                    position: absolute;
-                    background-position: -17px 0px;
-                    top: 4px;
-                    right: 0;
-                    width: 16px;
-                    height: 26px;
-
                 }
             }
 
@@ -74,7 +68,8 @@
                     display: flex;
 
                     li {
-                        a {
+                        cursor: pointer;
+                        span {
                             width: 40px;
                             height: 40px;
                             background-color: var(--white);
@@ -88,8 +83,9 @@
                             margin-right: 5px;
                         }
 
-                        &.active {
-                            a {
+                        &.active,
+                        &:hover {
+                            span {
                                 background-color: var(--box-pink3);
                             }
                         }
@@ -140,7 +136,7 @@
 
                 .list {
                     width: 250px;
-                    height: 280px;
+                    height: 285px;
                     background-color: var(--font-purple1);
                     border: 2px solid var(--font-purple1);
                     border-radius: 30px;
@@ -171,7 +167,8 @@
 
                     .day__diary {
                         background-color: var(--white);
-                        height: 240px;
+                        // height: 240px;
+                        height: 210px;
                         padding: 15px;
 
                         .title {
@@ -190,6 +187,36 @@
                             -webkit-line-clamp: 7;
                             -webkit-box-orient: vertical;
                         }
+                    }
+                    .btn__wrap {
+                        width: 102%;
+                        background-color: #fff;
+                        button {
+                            @include btn;
+                            width: 50%;
+                            background-color: var(--font-purple2);
+                            padding: 2%;
+                            &:hover {
+                                color: var(--font-purple2);
+                                background-color: var(--font-white2);
+                            }
+                        }
+                        .update {
+                            width: 49%;
+                        }
+                    }
+                }
+                .list.null {
+                    position: relative;
+                    &::after {
+                        content: '';
+                        position: absolute;
+                        width: 100%;
+                        height: inherit;
+                        top: 0;
+                        left: 0;
+                        z-index: 999;
+                        background-color: rgba(0, 0, 0, 0.438);
                     }
                 }
 
@@ -278,7 +305,7 @@
                 .diary__list__pages {
                     ul {
                         display: flex;
-
+                        //
                         li {
                             a {
                                 width: 30px;
@@ -288,7 +315,8 @@
                         }
 
                         &.active {
-                            a {}
+                            a {
+                            }
                         }
                     }
                 }
@@ -311,42 +339,44 @@
                     }
                 }
             }
+            .diarylist__bottomWrap {
+                //css 수정하기
+                .diarylist__bottom {
+                    width: 100%;
+                    min-height: 670px;
+                    height: auto;
+                    border-radius: 0 0 13px 13px;
 
-            .diarylist__bottom {
-                border-radius: 0 0 13px 13px;
-                width: 100%;
-                min-height: 670px;
-                height: auto;
-
-                .list__wrap {
-                    .list {
-                        width: 40%;
-                        height: 230px;
-                        border-radius: 30px;
-                        margin: 25px;
-                    }
-
-                    .voca__list {
-                        width: 40%;
-                        height: 230px;
-                        margin: 25px;
-
-                        .title {
-                            top: -15px;
-                            width: 100%;
+                    .list__wrap {
+                        .list {
+                            width: 40%;
+                            height: 230px;
+                            border-radius: 30px;
+                            margin: 25px;
                         }
 
-                        ul {
-                            padding: 40px 30px 30px 30px;
+                        .voca__list {
+                            width: 40%;
+                            height: 230px;
+                            margin: 25px;
 
-                            li {
-                                span {
-                                    font-size: 18px;
-                                    font-weight: 400;
-                                }
+                            .title {
+                                top: -15px;
+                                width: 100%;
+                            }
 
-                                &:last-child {
-                                    display: none;
+                            ul {
+                                padding: 40px 30px 30px 30px;
+
+                                li {
+                                    span {
+                                        font-size: 18px;
+                                        font-weight: 400;
+                                    }
+
+                                    &:last-child {
+                                        display: none;
+                                    }
                                 }
                             }
                         }
@@ -375,9 +405,11 @@
                         width: 70%;
                         height: 280px;
 
-                        &:first-child {}
+                        &:first-child {
+                        }
 
-                        .weekday {}
+                        .weekday {
+                        }
 
                         .day__diary {
                             height: 240px;
@@ -442,7 +474,8 @@
                     }
                 }
 
-                .diary__list__pages {}
+                .diary__list__pages {
+                }
 
                 .search__wrap {
                     display: none;
