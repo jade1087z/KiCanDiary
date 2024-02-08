@@ -61,21 +61,21 @@ const SearchVoca = ({
                 <div className="searchlist__btn">
                     <button
                         className="add__btn"
-                        onClick={(e) => {
-                            writeVoca(
-                                e,
-                                checkboxList,
-                                searchList,
-                                vocaList,
-                                uid,
-                                fetchSearchList,
-                                setSearchList,
-                                fetchVocaList,
-                                setVocaList,
-                                setCheckboxList,
-                                setCheckboxListAll
-                            )
-                        }}
+                        //   onClick={(e) => {
+                        //     writeVoca(
+                        //         e,
+                        //         checkboxList,
+                        //         searchList,
+                        //         vocaList,
+                        //         uid,
+                        //         fetchSearchList,
+                        //         setSearchList,
+                        //         fetchVocaList,
+                        //         setVocaList,
+                        //         setCheckboxList,
+                        //         setCheckboxListAll
+                        //     )
+                        // }}
                     >
                         Add
                     </button>

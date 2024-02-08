@@ -5,6 +5,7 @@ import useMonthNav from './listWrap/navigation/useMonthNav'
 import { useSelector } from 'react-redux'
 const DiaryList = () => {
     const uid = useSelector((state) => state.user.uid)
+
     const { currentDate, handleNextMonth, handlePrevMonth, prevDate } =
         useMonthNav()
     const [searchResult, setSearchResult] = useState([])
@@ -68,6 +69,7 @@ const DiaryList = () => {
                         postsPerPage={postsPerPage}
                         direction={direction}
                         searchResult={searchResult}
+                        uid={uid}
                     />
                 </div>
             </div>

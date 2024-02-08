@@ -43,9 +43,14 @@ export const userSlice = createSlice({
             state.isLoggedIn = false
             sessionStorage.removeItem('user')
         },
+
+        updatePhotoURL: (state, action) => {
+            state.photoURL = action.payload
+            sessionStorage.setItem('user', JSON.stringify(state))
+        },
     },
 })
 
-export const { loginUser, clearUser } = userSlice.actions
+export const { loginUser, clearUser, updatePhotoURL } = userSlice.actions
 
 export default userSlice.reducer

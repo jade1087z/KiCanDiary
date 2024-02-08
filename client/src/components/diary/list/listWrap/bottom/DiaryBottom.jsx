@@ -3,6 +3,7 @@ import List from './List'
 import { Link } from 'react-router-dom'
 import { AnimatePresence, motion } from 'framer-motion'
 import SearchList from './SearchList'
+import MyVocaList from './MyVocaList'
 
 const DiaryBottom = ({
     currentDate,
@@ -10,6 +11,7 @@ const DiaryBottom = ({
     postsPerPage,
     direction,
     searchResult,
+    uid,
 }) => {
     const variants = {
         enter: (direction) => {
@@ -71,43 +73,7 @@ const DiaryBottom = ({
                             />
                         )}
 
-                        <div className="voca__list">
-                            <h3 className="title">Voca List</h3>
-                            <ul>
-                                <li>
-                                    <span>overcome</span>
-                                    <span>극복하다</span>
-                                </li>
-                                <li>
-                                    <span>overcome</span>
-                                    <span>극복하다</span>
-                                </li>
-                                <li>
-                                    <span>overcome</span>
-                                    <span>극복하다</span>
-                                </li>
-                                <li>
-                                    <span>overcome</span>
-                                    <span>극복하다</span>
-                                </li>
-                                <li>
-                                    <span>overcome</span>
-                                    <span>극복하다</span>
-                                </li>
-                                <li>
-                                    <span>overcome</span>
-                                    <span>극복하다</span>
-                                </li>
-                                <li>
-                                    <span>overcome</span>
-                                    <span>극복하다</span>
-                                </li>
-                                <li>
-                                    <span>overcome</span>
-                                    <span>극복하다</span>
-                                </li>
-                            </ul>
-                        </div>
+                        <MyVocaList uid={uid} />
                     </div>
 
                     <div className="mobile__page">

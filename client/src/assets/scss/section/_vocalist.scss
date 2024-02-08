@@ -248,7 +248,8 @@
                         height: 100%;
                         font-size: 18px;
                         font-family: var(--dela);
-                        color: var(--white);
+                        color: var(--no-btn);
+
                         background-color: var(--box-purple1);
                         cursor: pointer;
                     }
@@ -278,7 +279,7 @@
                         height: 80%;
                         margin: 6.4px 2px;
                         border-right: 2px solid var(--white);
-                        color: #b1a6e3;
+                        color: var(--no-btn);
                     }
                 }
             }

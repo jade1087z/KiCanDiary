@@ -195,6 +195,8 @@ router.post('/correctlist', async (req, res) => {
 
 router.get('/showcorrectlist/:uid', async (req, res) => {
     const uid = req.params.uid
+    console.log(uid, 'uid')
+
     User.findOne({ uid: uid })
         .exec()
         .then((user) => {

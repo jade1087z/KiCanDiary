@@ -52,7 +52,7 @@
                 div {
                     margin-top: 13px;
                     color: #a2a8b2;
-
+                    cursor: pointer;
                     &:first-child {
                         color: #000;
                     }
@@ -75,6 +75,7 @@
                 text-align: left;
 
                 > div {
+                    cursor: pointer;
                     width: 20vw;
                     border-bottom: 2px solid #f4f4f4;
                     margin-bottom: 15px;

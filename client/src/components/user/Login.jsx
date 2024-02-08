@@ -1,8 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import firebase from '../../firebase.js'
-import { useDispatch, useSelector } from 'react-redux'
-import { loginUser } from '../../reducer/userSlice.js'
+import { useSelector } from 'react-redux'
 
 const Login = () => {
     const [email, setEmail] = useState('')

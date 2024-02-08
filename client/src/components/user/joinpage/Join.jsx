@@ -45,7 +45,7 @@ const Join = () => {
                 accessToken: accessToken,
                 photoURL: createdUser.user.multiFactor.user.photoURL || '',
             }
-            axios.post('api/user/join', body).then((response) => {
+            axios.post('/api/user/join', body).then((response) => {
                 if (response.data.success) {
                     alert('회원가입이 완료되었습니다.')
                     console.log(body)

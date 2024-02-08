@@ -35,20 +35,18 @@ const VocaList = () => {
         fetchCorrectList(correctList, setCorrectList, uid)
     }, [correctList, uid])
 
-    console.log(vocaList)
-    console.log(searchList)
-    console.log(correctList)
-
     return (
         <div id="wrap">
             <div id="vocalist" className="section__border">
                 <div className="vocalist__wrap">
+                    {/**
                     <MyCollection
-                        vocaList={vocaList}
-                        setVocaList={setVocaList}
-                        fetchVocaList={fetchVocaList}
-                        uid={uid}
+                    vocaList={vocaList}
+                    setVocaList={setVocaList}
+                    fetchVocaList={fetchVocaList}
+                    uid={uid}
                     />
+                */}
                     <div className="vocalist__right">
                         <SearchVoca
                             searchList={searchList}
