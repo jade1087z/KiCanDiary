@@ -2,53 +2,50 @@ import axios from 'axios'
 import React, { useEffect, useState } from 'react'
 import { FilePond } from 'react-filepond'
 import { useDispatch, useSelector } from 'react-redux'
-import { useNavigate } from 'react-router-dom'
 import { updatePhotoURL } from '../../../../reducer/userSlice'
+import firebase from '../../../../firebase'
 
 const ProfileModal = ({ user, onClose }) => {
     const [file, setFile] = useState(null)
-    const navigate = useNavigate()
     const dispatch = useDispatch()
     const photoUrl = useSelector((state) => state.user.photoURL)
-    console.log(photoUrl)
-    console.log(dispatch)
+
     const ProfileSubmit = async () => {
-        console.log(user)
 
         if (file) {
-            try {
-                const fileData = file[0]
-                console.log(file)
-                console.log(fileData)
+            const fileData = file[0]
+            const formData = new FormData()
 
-                const formData = new FormData()
+            formData.append('file', fileData)
+            formData.append('uid', user.uid)
 
-                formData.append('file', fileData)
-                formData.append('uid', user.uid)
-                // console.log(fileData)
-
-                const response = await axios.post(
-                    '/api/user/profileupload',
-                    formData,
-                    {
-                        headers: {
-                            'Content-Type': 'multipart/form-data',
-                        },
-                    }
-                )
-                alert('프로필이 변경되었습니다.')
-                console.log(response.data.photoURL)
-                dispatch(updatePhotoURL(response.data.photoURL))
-            } catch (error) {
-                alert('이미지 변경에 실패했습니다.')
-                console.error('이미지 업로드 실패:', error)
-            }
+            await axios.post('/api/user/profileupload', formData, {
+                headers: {
+                    'Content-Type': 'multipart/form-data',
+                },
+            }).then(async(res) => {
+                if (res.data.success) {
+                    alert('프로필이 변경되었습니다.')
+                    console.log(res.data.success)
+                    console.log(res.data.photoURL)
+                    dispatch(updatePhotoURL(res.data.photoURL))
+                    console.log(updatePhotoURL)
+                    await firebase.auth().currentUser.updateProfile({
+                        photoURL: res.data.photoURL
+                    })
+                    onClose()
+                }
+            }).catch((err) => {
+                alert('프로필 변경에 실패했어요.')
+                console.log(err)
+            })
         }
     }
-    useEffect(() => {
-        ProfileSubmit()
-    }, [dispatch])
 
+
+    useEffect(() => {
+    }, [dispatch, file, photoUrl])
+    
     return (
         <div className="passmodal">
             <div className="passmodal__content">
@@ -70,6 +67,7 @@ const ProfileModal = ({ user, onClose }) => {
                 </button>
                 <button onClick={onClose} className="close">
                     Close
+                  
                 </button>
             </div>
         </div>

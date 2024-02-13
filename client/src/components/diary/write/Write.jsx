@@ -22,6 +22,7 @@ const Write = () => {
         day: '',
     })
 
+    console.log(user)
     let navigate = useNavigate()
 
     useEffect(() => {

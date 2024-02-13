@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { BrowserRouter, Route, Routes } from 'react-router-dom'
 
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { loginUser, clearUser } from './reducer/userSlice'
 import firebase from './firebase.js'
 import './assets/scss/style.scss'
@@ -21,7 +21,7 @@ import DiaryUpdate from './components/diary/update/DiaryUpdate.jsx'
 const App = () => {
     const [isMobile, setIsMobile] = useState(false)
     const dispatch = useDispatch()
-
+    const user = useSelector((state) => state.user)
     useEffect(() => {
         const handleResize = () => {
             setIsMobile(window.innerWidth <= 480)
@@ -42,16 +42,25 @@ const App = () => {
             .onAuthStateChanged(async (userInfo) => {
                 console.log(userInfo)
                 if (userInfo !== null) {
-                    await dispatch(loginUser(userInfo.multiFactor.user))
+                    const user = {
+                        ...userInfo.multiFactor.user,
+                        photoURL: userInfo.multiFactor.user.photoURL !== null ? userInfo.multiFactor.user.photoURL : '',
+                    }
+                    await dispatch(loginUser(user))
+                
+                    // 세션 스토리지에 photoURL을 저장
+                    const savedUser = JSON.parse(sessionStorage.getItem('user')) || user
+                    savedUser.photoURL = user.photoURL
+                    sessionStorage.setItem('user', JSON.stringify(savedUser))
                 } else {
                     dispatch(clearUser())
                 }
+                
             })
         return () => {
             unsubscribe()
         }
     }, [dispatch])
-
     return (
         <BrowserRouter>
             <Main>

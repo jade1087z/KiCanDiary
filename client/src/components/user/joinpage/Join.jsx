@@ -34,16 +34,17 @@ const Join = () => {
 
             await createdUser.user.updateProfile({
                 displayName: name,
+                photoURL: '',  // photoURL 설정 추가
             })
 
             let accessToken = await createdUser.user.getIdToken()
 
             let body = {
-                email: createdUser.user.multiFactor.user.email,
-                displayName: createdUser.user.multiFactor.user.displayName,
-                uid: createdUser.user.multiFactor.user.uid,
+                email: createdUser.user.email,  // createdUser.user.multiFactor.user.email 대신 createdUser.user.email 사용 
+                displayName: createdUser.user.displayName,  // createdUser.user.multiFactor.user.displayName 대신 createdUser.user.displayName 사용
+                uid: createdUser.user.uid,  // createdUser.user.multiFactor.user.uid 대신 createdUser.user.uid 사용
                 accessToken: accessToken,
-                photoURL: createdUser.user.multiFactor.user.photoURL || '',
+                photoURL: createdUser.user.photoURL || '',  // createdUser.user.multiFactor.user.photoURL 대신 createdUser.user.photoURL 사용
             }
             axios.post('/api/user/join', body).then((response) => {
                 if (response.data.success) {

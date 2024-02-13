@@ -31,7 +31,7 @@ const Mypage = () => {
     const handleMenuClick = (menu) => {
         setSelectedMenu(menu)
     }
-
+    const photoUrl = useSelector((state) => state.user.photoURL)
     return (
         <div className="mypage__wrap">
             <div className="mypage__inner">
@@ -42,7 +42,7 @@ const Mypage = () => {
                             {user ? `${name} (${email})` : ''}
                         </div>
                     </div>
-
+                    
                     <div className="mypage__menu">
                         <div
                             // className={classNames('menu-item', { 'active': selectedMenu === '계정' })}

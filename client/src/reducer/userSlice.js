@@ -2,23 +2,7 @@ import { createSlice } from '@reduxjs/toolkit'
 
 export const userSlice = createSlice({
     name: 'user',
-    initialState: () => {
-        const savedUser = sessionStorage.getItem('user')
-        if (savedUser) {
-            return JSON.parse(savedUser)
-        } else {
-            return {
-                displayName: '',
-                uid: '',
-                accessToken: '',
-                photoURL: '',
-                isLoading: false,
-                email: '',
-                password: '',
-                isLoggedIn: false,
-            }
-        }
-    },
+    initialState: getInitialState(),
     reducers: {
         loginUser: (state, action) => {
             state.displayName = action.payload.displayName
@@ -37,6 +21,7 @@ export const userSlice = createSlice({
             state.displayName = ''
             state.uid = ''
             state.accessToken = ''
+            state.photoURL = ''
             state.email = ''
             state.password = ''
             state.isLoading = false
@@ -45,12 +30,42 @@ export const userSlice = createSlice({
         },
 
         updatePhotoURL: (state, action) => {
-            state.photoURL = action.payload
-            sessionStorage.setItem('user', JSON.stringify(state))
+            state.photoURL = action.payload  // 수정된 부분
+
+            const savedUser = JSON.parse(sessionStorage.getItem('user')) || state
+            savedUser.photoURL = action.payload
+            sessionStorage.setItem('user', JSON.stringify(savedUser))
+
+            // 리덕스 스토어의 상태를 세션 스토리지의 상태로 업데이트
+            state.displayName = savedUser.displayName
+            state.uid = savedUser.uid
+            state.accessToken = savedUser.accessToken
+            state.photoURL = savedUser.photoURL
+            state.isLoading = savedUser.isLoading
+            state.email = savedUser.email
+            state.password = savedUser.password
+            state.isLoggedIn = savedUser.isLoggedIn
         },
     },
-})
 
+})
+function getInitialState() {
+    const savedUser = sessionStorage.getItem('user')
+    if (savedUser) {
+        return JSON.parse(savedUser)
+    } else {
+        return {
+            displayName: '',
+            uid: '',
+            accessToken: '',
+            photoURL: '',
+            isLoading: false,
+            email: '',
+            password: '',
+            isLoggedIn: false,
+        }
+    }
+}
 export const { loginUser, clearUser, updatePhotoURL } = userSlice.actions
 
 export default userSlice.reducer
