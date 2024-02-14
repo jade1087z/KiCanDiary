@@ -28,23 +28,26 @@ const Join = () => {
             return alert('아이디 중복 검사를 통과 해주세요')
         }
         try {
+            await firebase
+                .auth()
+                .setPersistence(firebase.auth.Auth.Persistence.SESSION)
             let createdUser = await firebase
                 .auth()
                 .createUserWithEmailAndPassword(email, pass)
 
             await createdUser.user.updateProfile({
                 displayName: name,
-                photoURL: '',  // photoURL 설정 추가
+                photoURL: '', // photoURL 설정 추가
             })
 
             let accessToken = await createdUser.user.getIdToken()
 
             let body = {
-                email: createdUser.user.email,  // createdUser.user.multiFactor.user.email 대신 createdUser.user.email 사용 
-                displayName: createdUser.user.displayName,  // createdUser.user.multiFactor.user.displayName 대신 createdUser.user.displayName 사용
-                uid: createdUser.user.uid,  // createdUser.user.multiFactor.user.uid 대신 createdUser.user.uid 사용
+                email: createdUser.user.email, // createdUser.user.multiFactor.user.email 대신 createdUser.user.email 사용
+                displayName: createdUser.user.displayName, // createdUser.user.multiFactor.user.displayName 대신 createdUser.user.displayName 사용
+                uid: createdUser.user.uid, // createdUser.user.multiFactor.user.uid 대신 createdUser.user.uid 사용
                 accessToken: accessToken,
-                photoURL: createdUser.user.photoURL || '',  // createdUser.user.multiFactor.user.photoURL 대신 createdUser.user.photoURL 사용
+                photoURL: createdUser.user.photoURL || '', // createdUser.user.multiFactor.user.photoURL 대신 createdUser.user.photoURL 사용
             }
             axios.post('/api/user/join', body).then((response) => {
                 if (response.data.success) {

@@ -31,18 +31,26 @@ const Mypage = () => {
     const handleMenuClick = (menu) => {
         setSelectedMenu(menu)
     }
-    const photoUrl = useSelector((state) => state.user.photoURL)
     return (
         <div className="mypage__wrap">
             <div className="mypage__inner">
                 <div className="left">
                     <div className="user">
-                        <img src={userImage} alt="유저 이미지" />
+                        <img
+                            src={
+                                user.photoURL
+                                    ? `http://localhost:5050/${user.photoURL}`
+                                    : userImage
+                            }
+                            alt="유저 이미지"
+                        />
                         <div className="user__name">
-                            {user ? `${name} (${email})` : ''}
+                            {name
+                                ? `${name} ( ${email} )`
+                                : '로그인 후 이용해주세요'}
                         </div>
                     </div>
-                    
+
                     <div className="mypage__menu">
                         <div
                             // className={classNames('menu-item', { 'active': selectedMenu === '계정' })}

@@ -28,6 +28,9 @@ const Login = () => {
         }
 
         try {
+            await firebase
+                .auth()
+                .setPersistence(firebase.auth.Auth.Persistence.SESSION)
             await firebase.auth().signInWithEmailAndPassword(email, pass)
             alert('로그인 성공')
             navigate('/')

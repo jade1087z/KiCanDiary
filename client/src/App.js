@@ -18,10 +18,10 @@ import DiaryView from './components/diary/view/DiaryView.jsx'
 import Write from './components/diary/write/Write.jsx'
 import MainHome from './components/main/MainHome.jsx'
 import DiaryUpdate from './components/diary/update/DiaryUpdate.jsx'
+
 const App = () => {
     const [isMobile, setIsMobile] = useState(false)
     const dispatch = useDispatch()
-    const user = useSelector((state) => state.user)
     useEffect(() => {
         const handleResize = () => {
             setIsMobile(window.innerWidth <= 480)
@@ -44,23 +44,27 @@ const App = () => {
                 if (userInfo !== null) {
                     const user = {
                         ...userInfo.multiFactor.user,
-                        photoURL: userInfo.multiFactor.user.photoURL !== null ? userInfo.multiFactor.user.photoURL : '',
+                        photoURL:
+                            userInfo.multiFactor.user.photoURL !== null
+                                ? userInfo.multiFactor.user.photoURL
+                                : '',
                     }
                     await dispatch(loginUser(user))
-                
+
                     // 세션 스토리지에 photoURL을 저장
-                    const savedUser = JSON.parse(sessionStorage.getItem('user')) || user
+                    const savedUser =
+                        JSON.parse(sessionStorage.getItem('user')) || user
                     savedUser.photoURL = user.photoURL
                     sessionStorage.setItem('user', JSON.stringify(savedUser))
                 } else {
                     dispatch(clearUser())
                 }
-                
             })
         return () => {
             unsubscribe()
         }
     }, [dispatch])
+
     return (
         <BrowserRouter>
             <Main>

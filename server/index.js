@@ -11,6 +11,8 @@ const config = require('./config/key.js')
 app.use(express.static(path.join(__dirname, '../client/build')))
 app.use(express.json())
 app.use(express.urlencoded({ extended: true }))
+
+app.use('/uploads', express.static('uploads'))
 // router
 app.use('/api/user', require('./router/user.js'))
 app.use('/api/post', require('./router/post.js'))
